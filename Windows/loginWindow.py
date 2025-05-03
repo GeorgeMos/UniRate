@@ -8,7 +8,8 @@ import sys
 import PyQt6
 
 #Local Imports
-import Widgets.Color
+from Globals import Colors, Fonts
+
 class loginMain(QWidget):
     def __init__(self):
         super().__init__()
@@ -16,7 +17,9 @@ class loginMain(QWidget):
 
         #Widgets Setup
         self.usernameLabel = QLabel("Username")
+        self.usernameLabel.setFont(Fonts.loginLabelFont)
         self.passwordLabel = QLabel("Password")
+        self.passwordLabel.setFont(Fonts.loginLabelFont)
 
         self.usernameField = QLineEdit()
         self.usernameField.setFixedWidth(200)
@@ -47,6 +50,12 @@ class loginMain(QWidget):
         self.gridLayout.setRowStretch(0, 1)
         self.gridLayout.setRowStretch(4, 1)
         self.setLayout(self.gridLayout)
+
+        self.setAutoFillBackground(True)
+
+        palette = self.palette()
+        palette.setColor(QPalette.ColorRole.Window, Colors.secondaryLogoColor)
+        self.setPalette(palette)
 
 
 
