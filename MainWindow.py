@@ -22,21 +22,21 @@ class MainWindow(QMainWindow):
         self.currAction = ''
 
         #Widgets Setup
-        mainWidget = QWidget()
-        adminWindowWidget = adminW.adminMain()
-        studentWindowWidget = studentW.studentMain()
-        teacherWindowWidget = teacherW.teacherMain()
-        loginWindowWidget = loginW.loginMain()
+        self.mainWidget = QWidget()
+        self.adminWindowWidget = adminW.adminMain()
+        self.studentWindowWidget = studentW.studentMain()
+        self.teacherWindowWidget = teacherW.teacherMain()
+        self.loginWindowWidget = loginW.loginMain(self)
 
         #Layout Setup
-        stackLayout = QStackedLayout()
-        stackLayout.addWidget(adminWindowWidget)
-        stackLayout.addWidget(studentWindowWidget)
-        stackLayout.addWidget(teacherWindowWidget)
-        stackLayout.addWidget(loginWindowWidget)
-        stackLayout.setCurrentWidget(loginWindowWidget)
-        mainWidget.setLayout(stackLayout)
-        self.setCentralWidget(mainWidget)
+        self.stackLayout = QStackedLayout()
+        self.stackLayout.addWidget(self.adminWindowWidget)
+        self.stackLayout.addWidget(self.studentWindowWidget)
+        self.stackLayout.addWidget(self.teacherWindowWidget)
+        self.stackLayout.addWidget(self.loginWindowWidget)
+        self.stackLayout.setCurrentWidget(self.loginWindowWidget)
+        self.mainWidget.setLayout(self.stackLayout)
+        self.setCentralWidget(self.mainWidget)
         
         #Window setup
         self.setWindowTitle("UniRate")
@@ -44,6 +44,13 @@ class MainWindow(QMainWindow):
         self.setMaximumSize(QSize(1920, 1080))
         self.showFullScreen()
         self.setUpdatesEnabled(True)
+
+
+    def uiUpdate(self):
+        if self.loginWindowWidget.userType == "admin":
+            print("admin")
+        else:
+            print("BOGUS!")
         
     
             

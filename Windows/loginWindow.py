@@ -11,9 +11,11 @@ import PyQt6
 from Globals import Colors, Fonts
 
 class loginMain(QWidget):
-    def __init__(self):
+    def __init__(self, parentWindow :QMainWindow):
         super().__init__()
         self.setUpdatesEnabled(True)
+        self.userType = "none"
+        self.parentWindow = parentWindow
 
         #Widgets Setup
         self.usernameLabel = QLabel("Username")
@@ -29,6 +31,7 @@ class loginMain(QWidget):
 
         self.loginBtn = QPushButton()
         self.loginBtn.setText("Login")
+        self.loginBtn.clicked.connect(self.loginBtnAction)
 
         #Layout Setup
         self.gridLayout = QGridLayout()
@@ -56,6 +59,13 @@ class loginMain(QWidget):
         palette = self.palette()
         palette.setColor(QPalette.ColorRole.Window, Colors.secondaryLogoColor)
         self.setPalette(palette)
+
+    def loginBtnAction(self):
+        #Teting
+        self.userType = self.usernameField.text()
+        self.parentWindow.uiUpdate()
+        
+        
 
 
 
