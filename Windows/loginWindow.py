@@ -8,13 +8,14 @@ import sys
 import PyQt6
 
 #Local Imports
-from Globals import Colors, Fonts
+from Globals import Colors, Fonts, userType
+
 
 class loginMain(QWidget):
     def __init__(self, parentWindow :QMainWindow):
         super().__init__()
         self.setUpdatesEnabled(True)
-        self.userType = "none"
+        self.userLevel :userType = userType.NONE
         self.parentWindow = parentWindow
 
         #Widgets Setup
@@ -61,8 +62,15 @@ class loginMain(QWidget):
         self.setPalette(palette)
 
     def loginBtnAction(self):
-        #Teting
-        self.userType = self.usernameField.text()
+        #Testing
+        if self.usernameField.text() == "admin":
+            self.userLevel = userType.ADMIN
+        elif self.usernameField.text() == "student":
+            self.userLevel = userType.STUDENT
+        elif self.usernameField.text() == "teacher":
+            self.userLevel = userType.TEACHER
+        else:
+            self.userLevel = userType.NONE
         self.parentWindow.uiUpdate()
         
         

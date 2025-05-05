@@ -13,6 +13,9 @@ import Windows.Admin.adminMainWindow as adminW
 import Windows.Student.studentMainWindow as studentW
 import Windows.Teacher.teacherMainWindow as teacherW
 import Widgets.Color
+from Globals import userType
+
+from Widgets import subjectContainer as sc
 
 
 class MainWindow(QMainWindow):
@@ -36,7 +39,11 @@ class MainWindow(QMainWindow):
         self.stackLayout.addWidget(self.loginWindowWidget)
         self.stackLayout.setCurrentWidget(self.loginWindowWidget)
         self.mainWidget.setLayout(self.stackLayout)
-        self.setCentralWidget(self.mainWidget)
+        #self.setCentralWidget(self.mainWidget)
+
+        
+        self.testWidget = sc.SubjectContainer(userType.ADMIN)
+        self.setCentralWidget(self.testWidget)
         
         #Window setup
         self.setWindowTitle("UniRate")
@@ -47,8 +54,15 @@ class MainWindow(QMainWindow):
 
 
     def uiUpdate(self):
-        if self.loginWindowWidget.userType == "admin":
+        if self.loginWindowWidget.userLevel == userType.ADMIN:
             print("admin")
+            self.stackLayout.setCurrentWidget(self.adminWindowWidget)
+        elif self.loginWindowWidget.userLevel == userType.STUDENT:
+            print("student")
+            self.stackLayout.setCurrentWidget(self.studentWindowWidget)
+        elif self.loginWindowWidget.userLevel == userType.TEACHER:
+            print("teacher")
+            self.stackLayout.setCurrentWidget(self.teacherWindowWidget)
         else:
             print("BOGUS!")
         

@@ -12,4 +12,7 @@ class adminMain(QWidget):
         super().__init__()
         self.setUpdatesEnabled(True)
 
+        self.testLabel = QLabel("ADMIN")
+        
+
         

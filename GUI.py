@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QApplication
 import sys
 
 #Local Lib Imports
-from MainWindow import MainWindow
+from Windows.MainWindow import MainWindow
 
 
 #Start the main gui loop
