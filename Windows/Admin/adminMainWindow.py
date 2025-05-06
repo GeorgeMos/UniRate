@@ -7,12 +7,24 @@ from PyQt6.QtGui import QPalette, QColor, QAction
 import sys
 import PyQt6
 
+from Widgets.subjectContainer import SubjectContainer
+from Globals import userType
+
 class adminMain(QWidget):
     def __init__(self):
         super().__init__()
         self.setUpdatesEnabled(True)
 
-        self.testLabel = QLabel("ADMIN")
+        self.hLayout = QGridLayout()
+
+        self.subCont = SubjectContainer(userType.ADMIN)
+        self.hLayout.addWidget(self.subCont, 0, 0)
+
+        self.hLayout.setColumnStretch(1, 1)
+
+        self.setLayout(self.hLayout)
+
+
         
 
         

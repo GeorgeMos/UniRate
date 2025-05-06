@@ -69,22 +69,39 @@ class SubjectContainer(QWidget):
         super().__init__()
         self.setUpdatesEnabled(True)
         self.userLevel = userLevel
+        self.searchTerm = ""
+
 
         self.subArr = []
-        subFrame = upAPI.getRandomSubjects()
-        for i in range(subFrame.shape[0]):
-            name = subFrame[subFrame.index == i]
-            name = name.values[0][0]
-            self.subArr.append(subject(name))
+        subFrame = upAPI.getRandomSubjects(self.searchTerm)
+        for i in subFrame.values:
+            self.subArr.append(subject(i[0]))
 
         self.vLayout = QVBoxLayout()
 
         self.searchBar = searchBar()
+        self.searchBar.subjectField.textChanged.connect(self.updateSubjects)
         self.subjects = subjects(self.subArr)
 
         self.vLayout.addWidget(self.searchBar)
         self.vLayout.addWidget(self.subjects)
 
         self.setLayout(self.vLayout)
+
+    def updateSubjects(self):
+        self.searchTerm = self.searchBar.subjectField.text()
+        
+        self.subArr = []
+        subFrame = upAPI.getRandomSubjects(self.searchTerm)
+        for i in subFrame.values:
+            self.subArr.append(subject(i[0]))
+        
+        self.vLayout.removeWidget(self.subjects)
+        self.subjects = subjects(self.subArr)
+        self.vLayout.addWidget(self.subjects)
+        self.subjects.update()
+        self.vLayout.update()
+        self.update()
+            
 
 

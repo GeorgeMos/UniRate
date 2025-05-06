@@ -39,11 +39,11 @@ class MainWindow(QMainWindow):
         self.stackLayout.addWidget(self.loginWindowWidget)
         self.stackLayout.setCurrentWidget(self.loginWindowWidget)
         self.mainWidget.setLayout(self.stackLayout)
-        #self.setCentralWidget(self.mainWidget)
+        self.setCentralWidget(self.mainWidget)
 
         
-        self.testWidget = sc.SubjectContainer(userType.ADMIN)
-        self.setCentralWidget(self.testWidget)
+        #self.testWidget = sc.SubjectContainer(userType.ADMIN)
+        #self.setCentralWidget(self.testWidget)
         
         #Window setup
         self.setWindowTitle("UniRate")
