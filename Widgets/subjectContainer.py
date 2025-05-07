@@ -10,6 +10,7 @@ import pandas as pd
 
 #Local imports
 from API.upAPI import upAPI
+from Globals import userType
 
 class searchBar(QWidget):
     def __init__(self):
@@ -36,10 +37,16 @@ class subject(QWidget):
 
         self.mainAction = QPushButton()
         self.mainAction.setText(self.name)
+        self.mainAction.clicked.connect(self.clickAction)
 
         self.hLayout.addWidget(self.mainAction)
 
         self.setLayout(self.hLayout)
+
+    def clickAction(self):
+        #Absolute terrible way to make things work.
+        self.parent().parent().parent().parent().parent().subClicked.setText(self.name)
+
 
 
 
@@ -64,18 +71,23 @@ class subjects(QWidget):
         self.setLayout(self.vLayout)
 
 
+    
+
+
 class SubjectContainer(QWidget):
-    def __init__(self, userLevel):
+    def __init__(self, userLevel :userType):
         super().__init__()
         self.setUpdatesEnabled(True)
         self.userLevel = userLevel
         self.searchTerm = ""
 
+        self.subClicked = QLineEdit()
 
         self.subArr = []
         subFrame = upAPI.getRandomSubjects(self.searchTerm)
         for i in subFrame.values:
             self.subArr.append(subject(i[0]))
+            
 
         self.vLayout = QVBoxLayout()
 
@@ -102,6 +114,8 @@ class SubjectContainer(QWidget):
         self.subjects.update()
         self.vLayout.update()
         self.update()
+
+
             
 
 

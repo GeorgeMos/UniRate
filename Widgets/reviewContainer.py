@@ -45,7 +45,7 @@ class review(QWidget):
         self.setLayout(self.vLayout)
 
 class ReviewContainer(QWidget):
-    def __init__(self):
+    def __init__(self, subjectCode):
         super().__init__()
         self.setUpdatesEnabled(True)
 
