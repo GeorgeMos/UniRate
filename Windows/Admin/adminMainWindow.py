@@ -21,7 +21,7 @@ class adminMain(QWidget):
 
         self.subCont = SubjectContainer(userType.ADMIN)
         self.subCont.subClicked.textChanged.connect(self.onSubClicked)
-        self.revCont = ReviewContainer(0)
+        self.revCont = ReviewContainer("")
 
 
         self.hLayout.addWidget(self.subCont, 0, 0)
@@ -33,7 +33,14 @@ class adminMain(QWidget):
 
     def onSubClicked(self):
         self.subClicked = self.subCont.subClicked.text()
-        print(self.subClicked)
+
+        self.hLayout.removeWidget(self.revCont)
+        self.revCont = ReviewContainer(self.subClicked)
+        self.hLayout.addWidget(self.revCont, 0, 1)
+        self.hLayout.setColumnStretch(1, 1)
+        self.hLayout.update()
+        self.update()
+
 
 
         

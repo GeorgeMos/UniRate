@@ -48,11 +48,12 @@ class ReviewContainer(QWidget):
     def __init__(self, subjectCode):
         super().__init__()
         self.setUpdatesEnabled(True)
+        self.subjectCode = subjectCode
 
         self.revArr = []
 
         for i in range(10):
-            self.revArr.append(review("Text", "Username"))
+            self.revArr.append(review(self.subjectCode, "Username"))
 
         self.vLayout = QVBoxLayout()
 
