@@ -8,6 +8,7 @@ import sys
 import PyQt6
 
 from Widgets.subjectContainer import SubjectContainer
+from Widgets.reviewContainer import ReviewContainer
 from Globals import userType
 
 class adminMain(QWidget):
@@ -18,7 +19,10 @@ class adminMain(QWidget):
         self.hLayout = QGridLayout()
 
         self.subCont = SubjectContainer(userType.ADMIN)
+        self.revCont = ReviewContainer()
+
         self.hLayout.addWidget(self.subCont, 0, 0)
+        self.hLayout.addWidget(self.revCont, 0, 1)
 
         self.hLayout.setColumnStretch(1, 1)
 
