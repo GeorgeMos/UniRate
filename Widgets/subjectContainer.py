@@ -60,8 +60,11 @@ class subjects(QWidget):
         self.subArray = subArray
 
         self.paneLayout = QVBoxLayout()
+        ind = 0
         for sub in self.subArray:
             self.paneLayout.addWidget(sub)
+            self.paneLayout.setStretch(ind, 1)
+            ind += 1
         self.containerWidget.setLayout(self.paneLayout)
         self.scrollPane.setWidgetResizable(True)
         self.scrollPane.setWidget(self.containerWidget)

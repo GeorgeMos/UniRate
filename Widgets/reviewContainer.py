@@ -52,8 +52,19 @@ class ReviewContainer(QWidget):
 
         self.revArr = []
 
-        for i in range(10):
-            self.revArr.append(review(self.subjectCode, "Username"))
+        if(self.subjectCode != ""):
+            num = int(str(self.subjectCode).split(" ")[1])
+            data = uniRateAPI.getRandomReviews(num)
+            values = data.values
+
+
+            for i in values:
+                userData = uniRateAPI.getRandomUsers(i[1])
+                if len(userData.values) > 0:
+                    name = userData.values[0][1] + " " + userData.values[0][2]
+                else:
+                    name = ""
+                self.revArr.append(review(i[2], name))
 
         self.vLayout = QVBoxLayout()
 
