@@ -1,5 +1,5 @@
 #Global Lib Imports
-from PyQt6.QtCore import QSize, Qt, pyqtSignal, QObject
+from PyQt6.QtCore import QSize, Qt, pyqtSignal, QObject, QPropertyAnimation, QPoint
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QGridLayout, QStackedLayout, QVBoxLayout, \
     QHBoxLayout, QScrollArea
 from PyQt6.QtWidgets import QTabWidget, QToolBar, QLabel, QTableView, QScrollArea, QComboBox, QFileDialog, QLineEdit, QScrollBar
@@ -7,6 +7,7 @@ from PyQt6.QtGui import QPalette, QColor, QAction
 import sys
 import PyQt6
 import pandas as pd
+from random import randint
 
 #Local imports
 from API.upAPI import upAPI
@@ -39,6 +40,8 @@ class subject(QWidget):
         self.mainAction.setText(self.name)
         self.mainAction.clicked.connect(self.clickAction)
 
+        self.setMouseTracking(True)
+
         self.hLayout.addWidget(self.mainAction)
 
         self.setLayout(self.hLayout)
@@ -46,6 +49,16 @@ class subject(QWidget):
     def clickAction(self):
         #Absolute terrible way to make things work.
         self.parent().parent().parent().parent().parent().subClicked.setText(self.name)
+
+    def mouseMoveEvent(self, a0):
+        if self.parent().parent().parent().parent().parent().userLevel == userType.NONE:
+            self.anim = QPropertyAnimation(self, b"pos")
+            #self.anim.setEndValue(QPoint(400, 400))
+            self.anim.setEndValue(QPoint(randint(0, 100), randint(0, 500)))
+
+            self.anim.setDuration(1500)
+            self.anim.start()
+        return super().mouseMoveEvent(a0)
 
 
 

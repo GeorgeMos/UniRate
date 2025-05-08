@@ -12,14 +12,15 @@ from Widgets.reviewContainer import ReviewContainer
 from Globals import userType
 
 class adminMain(QWidget):
-    def __init__(self):
+    def __init__(self, type :userType):
         super().__init__()
         self.setUpdatesEnabled(True)
         self.subClicked = ""
+        self.type = type
 
         self.hLayout = QGridLayout()
 
-        self.subCont = SubjectContainer(userType.ADMIN)
+        self.subCont = SubjectContainer(self.type)
         self.subCont.subClicked.textChanged.connect(self.onSubClicked)
         self.revCont = ReviewContainer("")
 

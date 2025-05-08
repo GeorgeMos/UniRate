@@ -26,7 +26,8 @@ class MainWindow(QMainWindow):
 
         #Widgets Setup
         self.mainWidget = QWidget()
-        self.adminWindowWidget = adminW.adminMain()
+        self.adminWindowWidget = adminW.adminMain(userType.ADMIN)
+        self.admintestWindowWidget = adminW.adminMain(userType.NONE)
         self.studentWindowWidget = studentW.studentMain()
         self.teacherWindowWidget = teacherW.teacherMain()
         self.loginWindowWidget = loginW.loginMain(self)
@@ -34,6 +35,7 @@ class MainWindow(QMainWindow):
         #Layout Setup
         self.stackLayout = QStackedLayout()
         self.stackLayout.addWidget(self.adminWindowWidget)
+        self.stackLayout.addWidget(self.admintestWindowWidget)
         self.stackLayout.addWidget(self.studentWindowWidget)
         self.stackLayout.addWidget(self.teacherWindowWidget)
         self.stackLayout.addWidget(self.loginWindowWidget)
@@ -63,6 +65,9 @@ class MainWindow(QMainWindow):
         elif self.loginWindowWidget.userLevel == userType.TEACHER:
             print("teacher")
             self.stackLayout.setCurrentWidget(self.teacherWindowWidget)
+        elif self.loginWindowWidget.userLevel == userType.NONE:
+            print("testUser")
+            self.stackLayout.setCurrentWidget(self.admintestWindowWidget)
         else:
             print("BOGUS!")
         

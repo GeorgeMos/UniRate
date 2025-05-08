@@ -69,6 +69,8 @@ class loginMain(QWidget):
             self.userLevel = userType.STUDENT
         elif self.usernameField.text() == "teacher":
             self.userLevel = userType.TEACHER
+        elif self.usernameField.text() == "testUser":
+            self.userLevel = userType.NONE
         else:
             self.userLevel = userType.NONE
         self.parentWindow.uiUpdate()
