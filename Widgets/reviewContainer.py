@@ -1,5 +1,5 @@
 #Global Lib Imports
-from PyQt6.QtCore import QSize, Qt, pyqtSignal, QObject
+from PyQt6.QtCore import QSize, Qt, pyqtSignal, QObject, QPropertyAnimation, QPoint
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QGridLayout, QStackedLayout, QVBoxLayout, \
     QHBoxLayout, QScrollArea
 from PyQt6.QtWidgets import QTabWidget, QToolBar, QLabel, QTableView, QScrollArea, QComboBox, QFileDialog, QLineEdit, QScrollBar
@@ -7,10 +7,12 @@ from PyQt6.QtGui import QPalette, QColor, QAction
 import sys
 import PyQt6
 import pandas as pd
+from random import randint
 
 #Local imports
 from API.upAPI import upAPI
 from API.uniRateAPI import uniRateAPI
+from Globals import userType
 
 
 class review(QWidget):
@@ -42,13 +44,26 @@ class review(QWidget):
         self.vLayout.addWidget(self.scrollPane)
         self.vLayout.setStretch(1, 1)
 
+        self.setMouseTracking(True)
+
         self.setLayout(self.vLayout)
 
+    def mouseMoveEvent(self, a0):
+        if self.parent().parent().parent().parent().userLevel == userType.NONE:
+            self.anim = QPropertyAnimation(self, b"pos")
+            #self.anim.setEndValue(QPoint(400, 400))
+            self.anim.setEndValue(QPoint(randint(0, 400), randint(0, 500)))
+            self.raise_()
+            self.anim.setDuration(1500)
+            self.anim.start()
+        return super().mouseMoveEvent(a0)
+
 class ReviewContainer(QWidget):
-    def __init__(self, subjectCode):
+    def __init__(self, subjectCode, type :userType):
         super().__init__()
         self.setUpdatesEnabled(True)
         self.subjectCode = subjectCode
+        self.userLevel = type
 
         self.revArr = []
 
