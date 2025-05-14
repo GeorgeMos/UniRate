@@ -56,7 +56,7 @@ class subject(QWidget):
             #self.anim.setEndValue(QPoint(400, 400))
             self.anim.setEndValue(QPoint(randint(0, 100), randint(0, 500)))
             self.raise_()
-            self.anim.setDuration(1500)
+            self.anim.setDuration(500)
             self.anim.start()
         return super().mouseMoveEvent(a0)
 
