@@ -79,6 +79,9 @@ class ReviewContainer(QWidget):
                     name = userData.values[0][1] + " " + userData.values[0][2]
                 else:
                     name = ""
+
+                if self.userLevel == userType.TEACHER:
+                    name = "Anonymus User"
                 self.revArr.append(review(i[2], name))
 
         self.vLayout = QVBoxLayout()

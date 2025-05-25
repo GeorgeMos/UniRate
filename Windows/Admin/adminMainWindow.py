@@ -24,13 +24,29 @@ class adminMain(QWidget):
         self.subCont.subClicked.textChanged.connect(self.onSubClicked)
         self.revCont = ReviewContainer("", self.type)
 
-
         self.hLayout.addWidget(self.subCont, 0, 0)
         self.hLayout.addWidget(self.revCont, 0, 1)
 
         self.hLayout.setColumnStretch(1, 1)
+        self.vLayout = QVBoxLayout()
+        self.toolbar = QToolBar("Main bar")
+        self.vLayout.addWidget(self.toolbar)
 
-        self.setLayout(self.hLayout)
+        self.profileAction = QAction("Profile", self)
+        self.profileAction.setStatusTip("Profile")
+        self.profileAction.triggered.connect(self.profileClicked)
+        self.toolbar.addAction(self.profileAction)
+
+        self.repReviews = QAction("Reported", self)
+        self.repReviews.triggered.connect(self.reportedClicked)
+        self.toolbar.addAction(self.repReviews)
+
+        self.dummy = QWidget()
+        self.dummy.setLayout(self.hLayout)
+        self.vLayout.addWidget(self.dummy)
+        self.vLayout.setStretch(1, 1)
+
+        self.setLayout(self.vLayout)
 
     def onSubClicked(self):
         self.subClicked = self.subCont.subClicked.text()
@@ -41,6 +57,12 @@ class adminMain(QWidget):
         self.hLayout.setColumnStretch(1, 1)
         self.hLayout.update()
         self.update()
+
+    def profileClicked(self):
+        pass
+
+    def reportedClicked(self):
+        pass
 
 
 

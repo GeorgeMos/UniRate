@@ -28,8 +28,8 @@ class MainWindow(QMainWindow):
         self.mainWidget = QWidget()
         self.adminWindowWidget = adminW.adminMain(userType.ADMIN)
         self.admintestWindowWidget = adminW.adminMain(userType.NONE)
-        self.studentWindowWidget = studentW.studentMain()
-        self.teacherWindowWidget = teacherW.teacherMain()
+        self.studentWindowWidget = studentW.studentMain(userType.STUDENT)
+        self.teacherWindowWidget = teacherW.teacherMain(userType.TEACHER)
         self.loginWindowWidget = loginW.loginMain(self)
 
         #Layout Setup
