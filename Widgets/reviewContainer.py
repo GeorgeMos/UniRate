@@ -30,13 +30,37 @@ class review(QWidget):
         self.textLineEdit.setText(text)
         self.textLineEdit.setEnabled(False)
 
+        self.likeWidget = QWidget()
+
+        self.likeBtn = QPushButton("Like")
+        self.likeBtn.setFixedWidth(50)
+        self.likeBtn.clicked.connect(self.like)
+
+        self.repBtn = QPushButton("Report")
+        self.repBtn.setFixedWidth(50)
+        self.repBtn.clicked.connect(self.report)
+
+        self.likeLabel = QLabel("Likes: " + str(randint(0, 50)))
+
+        self.likeLayout = QHBoxLayout()
+        self.likeLayout.addWidget(self.likeBtn)
+        self.likeLayout.addWidget(self.likeLabel)
+        self.likeLayout.addWidget(QWidget())
+        self.likeLayout.addWidget(self.repBtn)
+        self.likeWidget.setLayout(self.likeLayout)
+        self.likeLayout.setStretch(0, 0)
+        self.likeLayout.setStretch(1, 0)
+        self.likeLayout.setStretch(2, 1)
+
         self.paneLayout = QVBoxLayout()
 
         self.paneLayout.addWidget(self.textLineEdit)
+        self.paneLayout.addWidget(self.likeWidget)
 
         self.containerWidget.setLayout(self.paneLayout)
         self.scrollPane.setWidgetResizable(True)
         self.scrollPane.setWidget(self.containerWidget)
+        self.scrollPane.setFixedHeight(100)
 
         self.vLayout = QVBoxLayout()
 
@@ -57,6 +81,12 @@ class review(QWidget):
             self.anim.setDuration(500)
             self.anim.start()
         return super().mouseMoveEvent(a0)
+    
+    def report(self):
+        self.repBtn.setEnabled(False)
+
+    def like(self):
+        self.likeBtn.setEnabled(False)
 
 class ReviewContainer(QWidget):
     def __init__(self, subjectCode, type :userType):
