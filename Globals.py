@@ -12,3 +12,4 @@ class Colors():
 class Fonts():
      loginLabelFont = QFont("Times", 10)
      loginLabelFont.setBold(True)
+     
