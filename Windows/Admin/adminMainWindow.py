@@ -56,11 +56,6 @@ class adminMain(QWidget):
         self.toolbar = QToolBar("Main bar")
         self.vLayout.addWidget(self.toolbar)
 
-        self.profileAction = QAction("Profile", self)
-        self.profileAction.setStatusTip("Profile")
-        self.profileAction.triggered.connect(self.profileClicked)
-        self.toolbar.addAction(self.profileAction)
-
         self.repReviews = QAction("Reported", self)
         self.repReviews.triggered.connect(self.reportedClicked)
         self.toolbar.addAction(self.repReviews)
@@ -86,10 +81,7 @@ class adminMain(QWidget):
         self.subTitle.setText(self.subClicked)
         self.subTitleLayout.update()
         self.update()
-
-    def profileClicked(self):
-        pass
-
+        
     def reportedClicked(self):
         pass
 

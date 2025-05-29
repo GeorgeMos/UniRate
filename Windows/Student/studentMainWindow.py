@@ -46,7 +46,12 @@ class studentMain(QWidget):
         self.subTitleWidget.setLayout(self.subTitleLayout)
         self.qnaCont = QnaContainer("", self.type)
         self.subTitleLayout.addWidget(self.qnaLabel, 3, 0)
-        self.subTitleLayout.addWidget(self.qnaCont, 4, 0)
+
+        self.qnaBtn = QPushButton("Ask Something")
+        self.qnaBtn.setFixedWidth(100)
+        #self.subTitleLayout.addWidget(self.qnaBtn, 4, 0)
+
+        self.subTitleLayout.addWidget(self.qnaCont, 5, 0)
 
         self.hLayout.addWidget(self.subCont, 0, 0)
         self.hLayout.addWidget(self.subTitleWidget, 0, 1)
@@ -56,9 +61,9 @@ class studentMain(QWidget):
         self.toolbar = QToolBar("Main bar")
         self.vLayout.addWidget(self.toolbar)
 
-        self.profileAction = QAction("Profile", self)
-        self.profileAction.setStatusTip("Profile")
-        self.profileAction.triggered.connect(self.profileClicked)
+        self.profileAction = QAction("My Progress", self)
+        self.profileAction.setStatusTip("My Progress")
+        self.profileAction.triggered.connect(self.progClicked)
         self.toolbar.addAction(self.profileAction)
 
         self.reviewAction = QAction("Favorites", self)
@@ -80,7 +85,8 @@ class studentMain(QWidget):
         self.revCont = ReviewContainer(self.subClicked, self.type)
         self.qnaCont = QnaContainer(self.subClicked, self.type)
         self.subTitleLayout.addWidget(self.revCont, 2, 0)
-        self.subTitleLayout.addWidget(self.qnaCont, 4, 0)
+        self.subTitleLayout.addWidget(self.qnaBtn, 4, 0)
+        self.subTitleLayout.addWidget(self.qnaCont, 5, 0)
         #self.hLayout.setColumnStretch(1, 1)
         self.rateLabel.setText("Rating: " + str(randint(0, 10)) + "/10")
         self.qnaLabel.setText("QnA:")
@@ -88,7 +94,7 @@ class studentMain(QWidget):
         self.subTitleLayout.update()
         self.update()
 
-    def profileClicked(self):
+    def progClicked(self):
         pass
 
     def favClicked(self):

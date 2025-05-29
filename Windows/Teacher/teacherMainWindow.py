@@ -56,11 +56,6 @@ class teacherMain(QWidget):
         self.toolbar = QToolBar("Main bar")
         self.vLayout.addWidget(self.toolbar)
 
-        self.profileAction = QAction("Profile", self)
-        self.profileAction.setStatusTip("Profile")
-        self.profileAction.triggered.connect(self.profileClicked)
-        self.toolbar.addAction(self.profileAction)
-
         self.reviewAction = QAction("Favorites", self)
         self.reviewAction.setStatusTip("Write a review for the selected subject")
         self.reviewAction.triggered.connect(self.favClicked)
@@ -87,10 +82,7 @@ class teacherMain(QWidget):
         self.subTitle.setText(self.subClicked)
         self.subTitleLayout.update()
         self.update()
-
-    def profileClicked(self):
-        pass
-
+        
     def favClicked(self):
         pass
 
