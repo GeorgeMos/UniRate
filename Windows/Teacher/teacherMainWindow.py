@@ -6,10 +6,11 @@ from PyQt6.QtWidgets import QTabWidget, QToolBar, QLabel, QTableView, QScrollAre
 from PyQt6.QtGui import QPalette, QColor, QAction
 import sys
 import PyQt6
+from random import randint
 
 from Widgets.subjectContainer import SubjectContainer, subject
 from Widgets.reviewContainer import ReviewContainer
-from Globals import userType
+from Globals import userType, Fonts
 
 class teacherMain(QWidget):
     def __init__(self, type :userType):
@@ -18,14 +19,30 @@ class teacherMain(QWidget):
         self.subClicked = ""
         self.type = type
 
-        self.hLayout = QGridLayout()
+        self.subTitleWidget = QWidget()
+        self.subTitleLayout = QGridLayout()
 
+        self.subTitle = QLabel(self.subClicked)
+        self.subTitle.setFont(Fonts.subTitleFont)
+        self.rateLabel = QLabel("")
+        self.rateLabel.setFont(Fonts.rateLabelFont)
+
+        self.subTitleLayout.addWidget(self.subTitle, 0, 0)
+        self.subTitleLayout.addWidget(self.rateLabel, 1, 0)
+
+
+
+
+        self.hLayout = QGridLayout()
         self.subCont = SubjectContainer(self.type)
         self.subCont.subClicked.textChanged.connect(self.onSubClicked)
         self.revCont = ReviewContainer("", self.type)
 
+        self.subTitleLayout.addWidget(self.revCont, 1, 0)
+        self.subTitleWidget.setLayout(self.subTitleLayout)
+
         self.hLayout.addWidget(self.subCont, 0, 0)
-        self.hLayout.addWidget(self.revCont, 0, 1)
+        self.hLayout.addWidget(self.subTitleWidget, 0, 1)
 
         self.hLayout.setColumnStretch(1, 1)
         self.vLayout = QVBoxLayout()
@@ -37,6 +54,7 @@ class teacherMain(QWidget):
         self.profileAction.triggered.connect(self.profileClicked)
         self.toolbar.addAction(self.profileAction)
 
+
         self.dummy = QWidget()
         self.dummy.setLayout(self.hLayout)
         self.vLayout.addWidget(self.dummy)
@@ -46,17 +64,17 @@ class teacherMain(QWidget):
 
     def onSubClicked(self):
         self.subClicked = self.subCont.subClicked.text()
-
-        self.hLayout.removeWidget(self.revCont)
+        self.subTitleLayout.removeWidget(self.revCont)
         self.revCont = ReviewContainer(self.subClicked, self.type)
-        self.hLayout.addWidget(self.revCont, 0, 1)
-        self.hLayout.setColumnStretch(1, 1)
-        self.hLayout.update()
+        self.subTitleLayout.addWidget(self.revCont, 2, 0)
+        #self.hLayout.setColumnStretch(1, 1)
+        self.rateLabel.setText("Rating: " + str(randint(0, 10)) + "/10")
+        self.subTitle.setText(self.subClicked)
+        self.subTitleLayout.update()
         self.update()
 
     def profileClicked(self):
         pass
-
 
 
         

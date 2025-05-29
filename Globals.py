@@ -13,3 +13,8 @@ class Fonts():
      loginLabelFont = QFont("Times", 10)
      loginLabelFont.setBold(True)
      
+     subTitleFont = QFont("Times", 30)
+     subTitleFont.setBold(True)
+
+     rateLabelFont = QFont("Times", 17)
+     rateLabelFont.setBold(True)
