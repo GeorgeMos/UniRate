@@ -9,7 +9,7 @@ import PyQt6
 from random import randint
 
 from Widgets.subjectContainer import SubjectContainer, subject
-from Widgets.reviewContainer import ReviewContainer
+from Widgets.reviewContainer import ReviewContainer, QnaContainer
 from Globals import userType, Fonts
 
 class studentMain(QWidget):
@@ -27,8 +27,12 @@ class studentMain(QWidget):
         self.rateLabel = QLabel("")
         self.rateLabel.setFont(Fonts.rateLabelFont)
 
+        self.qnaLabel = QLabel()
+        self.qnaLabel.setFont(Fonts.subTitleFont)
+
         self.subTitleLayout.addWidget(self.subTitle, 0, 0)
         self.subTitleLayout.addWidget(self.rateLabel, 1, 0)
+
 
 
 
@@ -38,8 +42,11 @@ class studentMain(QWidget):
         self.subCont.subClicked.textChanged.connect(self.onSubClicked)
         self.revCont = ReviewContainer("", self.type)
 
-        self.subTitleLayout.addWidget(self.revCont, 1, 0)
+        self.subTitleLayout.addWidget(self.revCont, 2, 0)
         self.subTitleWidget.setLayout(self.subTitleLayout)
+        self.qnaCont = QnaContainer("", self.type)
+        self.subTitleLayout.addWidget(self.qnaLabel, 3, 0)
+        self.subTitleLayout.addWidget(self.qnaCont, 4, 0)
 
         self.hLayout.addWidget(self.subCont, 0, 0)
         self.hLayout.addWidget(self.subTitleWidget, 0, 1)
@@ -54,9 +61,9 @@ class studentMain(QWidget):
         self.profileAction.triggered.connect(self.profileClicked)
         self.toolbar.addAction(self.profileAction)
 
-        self.reviewAction = QAction("Review", self)
+        self.reviewAction = QAction("Favorites", self)
         self.reviewAction.setStatusTip("Write a review for the selected subject")
-        self.reviewAction.triggered.connect(self.reviewClicked)
+        self.reviewAction.triggered.connect(self.favClicked)
         self.toolbar.addAction(self.reviewAction)
 
         self.dummy = QWidget()
@@ -69,10 +76,14 @@ class studentMain(QWidget):
     def onSubClicked(self):
         self.subClicked = self.subCont.subClicked.text()
         self.subTitleLayout.removeWidget(self.revCont)
+        self.subTitleLayout.removeWidget(self.qnaCont)
         self.revCont = ReviewContainer(self.subClicked, self.type)
+        self.qnaCont = QnaContainer(self.subClicked, self.type)
         self.subTitleLayout.addWidget(self.revCont, 2, 0)
+        self.subTitleLayout.addWidget(self.qnaCont, 4, 0)
         #self.hLayout.setColumnStretch(1, 1)
         self.rateLabel.setText("Rating: " + str(randint(0, 10)) + "/10")
+        self.qnaLabel.setText("QnA:")
         self.subTitle.setText(self.subClicked)
         self.subTitleLayout.update()
         self.update()
@@ -80,7 +91,7 @@ class studentMain(QWidget):
     def profileClicked(self):
         pass
 
-    def reviewClicked(self):
+    def favClicked(self):
         pass
 
 

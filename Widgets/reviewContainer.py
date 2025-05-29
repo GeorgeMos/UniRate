@@ -287,7 +287,7 @@ class QnaContainer(QWidget):
 
                 if self.userLevel == userType.TEACHER:
                     name = "Anonymus User"
-                self.revArr.append(qna(i[2], name, str(name + "'s review comments"), 0))
+                self.revArr.append(qna(i[2], name, str(name + "'s Question answers"), 0))
 
         self.vLayout = QVBoxLayout()
 
