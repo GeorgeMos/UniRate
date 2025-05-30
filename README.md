@@ -1,7 +1,7 @@
 # UniRate
 Software technology - University of Patras
 
-![alt text](image.png)
+![alt text](Images/png/uniRate_1.png)
 
 ΜΕΛΗ ΟΜΑΔΑΣ: 
 
