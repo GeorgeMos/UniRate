@@ -56,14 +56,14 @@ class review(QWidget):
         self.likeLayout = QHBoxLayout()
         self.likeLayout.addWidget(self.likeBtn)
         self.likeLayout.addWidget(self.likeLabel)
-        if mode == 0:
+        if mode == 0 and 0:
             self.likeLayout.addWidget(self.commentBtn)
         self.likeLayout.addWidget(QWidget())
         self.likeLayout.addWidget(self.repBtn)
         self.likeWidget.setLayout(self.likeLayout)
         self.likeLayout.setStretch(0, 0)
         self.likeLayout.setStretch(1, 0)
-        if mode == 0:
+        if mode == 0 and 0:
             self.likeLayout.setStretch(2, 0)
             self.likeLayout.setStretch(3, 1)
         elif mode == 1:
